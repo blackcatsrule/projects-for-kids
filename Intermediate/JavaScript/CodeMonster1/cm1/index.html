@@ -6,7 +6,7 @@
   <head>
     
     <!-- This is the title of your web page.  The browser displays this in the title bar. -->
-    <title>CodeMonster practice page</title>
+    <title>Hazel</title>
     
     <!-- This script tag downloads a javascript library from the internet that allows pretty print of code in HTML -->
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
@@ -35,16 +35,39 @@
 
          //This is a variable or 'bucket' to hold the number 80.
          var size = 80; // Slashy comments can go at the end of a line of code.
-
-         c.fillStyle ="rgb(0, 255, 0)";  //Here we tell the 'context' what color to use in levels of red, green and blue  
+        //c.rotate(0*Math.PI/180);
+         c.fillStyle ="rgb(0, 0, 255)";  //Here we tell the 'context' what color to use in levels of red, green and blue  
          c.fillRect(20, 20, size, size);  //Here we tell the context to draw a filled in rectangle starting at x,y of 20,20 with a height and width of 'size' pixels
          c.fillStyle ="red"; //Here we tell the context to next use the color red.
          c.fillRect(80, 80, size, size); //And draw a filled in rectangle at position 80,80
+        c.beginPath();
+        c.arc(95,50,40,0,2*Math.PI);
+        c.stroke();
+        
+        
+        c.fillStyle ="yellow";
+        c.font = "30px Courier";
+        c.fillText("Hello World",10,50);
+        
+        var txt = document.getElementById('myText').value;
+       
+        c.rotate(45*Math.PI/180);
+        c.fillText(txt,100,100);
+        c.rotate(-45*Math.PI/180);
+        
+        var txtlength = txt.length;
+        
+        c.strokeText(txtlength,100,100);
+        
+        
          
         //Can you tell the context to draw other shapes using other colors?
         //Check out http://www.w3schools.com/html/html5_canvas.asp
       }
       
+      function refresh() {
+         location.reload();
+      }
       
     </script>
     
@@ -67,7 +90,7 @@
 
   <!-- Here is the body tag.  It tells the browser what elements to draw for your web page. -->
   <body>
-    <H1>Welcome Seattle Coder Dojo members!</H1> <!-- This is a header tag.  The contents are written using a large font. -->
+    <H1>Hi!!!!</H1> <!-- This is a header tag.  The contents are written using a large font. -->
     <!-- <p> Is the tag for a paragraph.  It defines a block of content, normally it has extra space above and below it. -->
     <!-- <a> Is a tag for a link to another page.  The href attribute contains the url or address of the page to link to. -->
     <p>This small file will let you practice the first <a href="http://www.crunchzilla.com/code-monster">CodeMonster</a> lesson.</p>
@@ -84,10 +107,14 @@
     <!-- Button is just that.  A button.  The onclick attribute tells the browser what to do when you click it. -->
     <!-- In this case, we tell the browser to execute the draw() javascriipt function that we defined above inside the <script> tag. -->
     <p><button onclick="draw()">Draw!</button></p> 
+     <p><button onclick="refresh()">New Canvas!</button></p> 
+        <textarea rows="4" cols="50" id ="myText">Hi!</textarea>
+    <p></p>
     
     <!-- This is our drawing canvas.  We give it the id or myCanvas so the draw() function can find it. -->
     <!-- Can you tell what the other attributes do? -->
     <canvas id="myCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
     <p class="footer">Pool Image | &copy; Ribe | <a href="http://www.dreamstime.com/">Dreamstime Stock Photos</a> &amp; <a href="http://www.stockfreeimages.com/">Stock Free Images</a></p>
+    
   </body>
 </html>
