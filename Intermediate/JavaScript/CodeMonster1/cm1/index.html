@@ -6,7 +6,7 @@
   <head>
     
     <!-- This is the title of your web page.  The browser displays this in the title bar. -->
-    <title>Hazel</title>
+    <title>Drawing Program!</title>
     
     <!-- This script tag downloads a javascript library from the internet that allows pretty print of code in HTML -->
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
@@ -59,10 +59,102 @@
         
         c.strokeText(txtlength,100,100);
         
-        
-         
-        //Can you tell the context to draw other shapes using other colors?
+      var w = c.canvas.width;
+      var h = c.canvas.height;
+
+ 
+      drawLine(w * 0.5, h, w * 0.5, h * 0.7, c);
+      //Left branch
+      drawLine(w * 0.5, h * 0.7, w * 0.4, h * 0.5, c);
+      //Right branch
+      drawLine(w * 0.5, h * 0.7, w * 0.6, h * 0.5, c);
+      
+      drawBranch(-0.1, 0.4, 0.5, 0.3, 0.4, w, h, c);
+      drawBranch(0.1, 0.6, 0.5, 0.7, 0.4, w, h, c);
+
+        tree(c);
+        drawTree(c);
+          //Can you tell the context to draw other shapes using other colors?
         //Check out http://www.w3schools.com/html/html5_canvas.asp
+      }
+      
+
+      function drawBranch(xchange, xx1, yy1, xx2, yy2, w, h, c){
+      
+        
+        for(var i = 1; i < 4; i++)
+        {
+        //Left branch
+        drawLine(w * xx1, h * yy1, w * xx2, h * yy2, c);
+        //Right branch
+        drawLine(w * xx1, h * yy1, w * xx2, h * yy2 - 20, c);
+        xx1 = xx2;
+        yy1 = yy2;
+        xx2 += xchange;
+        yy2 += i * 0.05;
+        }
+      }
+      
+      function drawLine(x1, y1, x2, y2, c) {
+        c.strokeStyle = "#EC80E5";
+        c.lineWidth = 5;
+        c.beginPath();
+        c.moveTo(x1, y1);
+        c.lineTo(x2, y2);
+        c.stroke();
+      }
+      function tree(c){ 
+      c.save();
+      var angle = 0.5;
+      var branchScale = 0.75;
+      var l = 60;
+      var minL = 5;
+      var w = c.canvas.width;
+      var h = c.canvas.height;
+      
+      c.translate(w/2, h);
+      drawBranch2(l, 0);
+      c.restore();
+      function drawBranch2(l, direction) {
+        c.save();
+        var a = angle * Math.random();
+        c.rotate(a * direction);
+        c.fillRect(-l / 20, 0, l / 10, -l);
+        if (l > minL) {
+          c.translate(0, -l);
+          // Make a number between -0.1 and 0.1
+          var b = 0.2 * (Math.random() - 0.5);
+          // Now make it between 0.9 and 1.1
+          b = b + 1;
+          // And use it to change branchScale
+          drawBranch2(l * b * branchScale, -1);
+          b = 1 + 0.2 * (Math.random() - 0.5);
+          drawBranch2(l * b * branchScale, 1);
+        }
+        c.restore();
+      }
+ }
+
+      function drawTree(c){
+            function drawBranch3(l, direction) {
+            c.save();
+            c.fillRect(-1, 0, 2, -l);
+            c.translate(0, -l);
+            if (l > 5) {
+              drawBranch3(l * 0.8, -direction);
+              c.rotate(0.5 * direction);
+              drawBranch3(l * 0.7, -direction);
+            } else {
+              c.fillStyle = "green";
+              c.fillRect(-2, -2, 4, 4);
+            }
+            c.restore();
+          }
+      c.save();
+      c.translate(200, 250);
+      c.strokeStyle = "#80EC87";
+      drawBranch3(50, 1);
+        c.restore();
       }
       
       function refresh() {
@@ -93,7 +185,7 @@
     <H1>Hi!!!!</H1> <!-- This is a header tag.  The contents are written using a large font. -->
     <!-- <p> Is the tag for a paragraph.  It defines a block of content, normally it has extra space above and below it. -->
     <!-- <a> Is a tag for a link to another page.  The href attribute contains the url or address of the page to link to. -->
-    <p>This small file will let you practice the first <a href="http://www.crunchzilla.com/code-monster">CodeMonster</a> lesson.</p>
+    <p>Hi! Melia is insane! Sasha isn't! Yay!</p>
     <p>First you need the canvas below.  Also, CodeMonster hides a few details from you, such as getting a handle to your drawing context<p>
     
     <!-- <pre> The pre tag stands for "preformatted".  It tells the browser not to apply any special formatting. -->
